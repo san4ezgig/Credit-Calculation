@@ -1,6 +1,6 @@
 import { Fragment } from 'preact';
 import { createPortal } from 'preact/compat';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import style from './style';
 
 const Modal = ({ isOpen, children }) => {
