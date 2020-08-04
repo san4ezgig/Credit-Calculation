@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node_modules/.bin/preact build",
+    "buildWithoutPrerender": "node_modules/.bin/preact build --no-prerender",
     "serve": "node_modules/.bin/sirv build --port 8080 --cors --single",
     "dev": "node_modules/.bin/preact watch",
     "lint": "node_modules/.bin/eslint src",
