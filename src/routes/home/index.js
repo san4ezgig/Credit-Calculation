@@ -1,17 +1,20 @@
 import { h } from 'preact';
 import style from './style';
 import currency from 'currency.js';
-import { useState, useCallback } from 'preact/hooks';
+import { useState, useCallback, useEffect } from 'preact/hooks';
+import useBooleanState from '../../hooks/useBooleanState';
 import ModalForm from '../../components/modalForm';
+import { storageKeys, storage } from '../../storage';
 
 const Home = () => {
 	const [isLoading, setIsLoading] = useState(false);
-	const [data, setData] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+	const storageData = storage.getItem(storageKeys.moneyData);
+	const [formData, setFormData] = useState(storageData);
+	const [viewData, setViewData] = useState(null);
+  const [isModalOpen, setModalOpen, setModalClose] = useBooleanState(!storageData);
 	const [error, setError] = useState('');
-	const handleFormSubmit = useCallback(async (sum, loanDate) => {
+	const getRateData = useCallback(async (sum, loanDate) => {
 		setIsLoading(true);
-		setIsModalOpen(false);
 
 		try {
 			const [firstResp, secondResp] = await Promise.all([
@@ -22,26 +25,43 @@ const Home = () => {
 				firstResp.json(),
 				secondResp.json(),
 			]);
-			setData({
+			setViewData({
 				belSum: sum,
 				oldUsdSum: currency(sum).divide(rateForOldDate).format(),
 				newUsdSum: currency(sum).divide(rateForNow).format(),
 			});
+			storage.setItem(storageKeys.moneyData, {
+				sum, loanDate,
+			})
 		} catch (e) {
 			setError('Что-то пошло не так, идите в жопу')
 		}
 		setIsLoading(false);
 	}, []);
-	const { belSum, oldUsdSum, newUsdSum } = data || {};
+
+	useEffect(() => {
+		if (formData) {
+			const {sum, loanDate} = formData;
+			getRateData(sum, loanDate);
+		}
+	}, [formData]);
+	
+	const handleFormSubmit = useCallback(async (sum, loanDate) => {
+		setModalClose();
+		setFormData({
+			sum, loanDate,
+		})
+	}, []);
+	const { belSum, oldUsdSum, newUsdSum } = viewData || {};
 
 	return (
 		<div class={style.home}>
 			<div class={style.error}>
 				{error}
 			</div>
-			{data && <div>
+			{viewData && <div class={style.contentContainer}>
 				<div>
-					{belSum} белорусских рублей
+					Сумма кредита - {belSum} белорусских рублей
 				</div>
 				<div>
 					{oldUsdSum} сумма в долларах на момент взятия кредита
@@ -49,9 +69,12 @@ const Home = () => {
 				<div>
 					{newUsdSum} сумма в долларах на сегодня
 				</div>
+				<button onClick={setModalOpen}>
+					Изменить данные
+				</button>
 			</div>}
 			
-			<ModalForm handleFormSubmit={handleFormSubmit} isModalOpen={isModalOpen} data={data} />
+			<ModalForm handleFormSubmit={handleFormSubmit} isModalOpen={isModalOpen} data={formData} setModalClose={setModalClose} />
 		</div>
 )};
 

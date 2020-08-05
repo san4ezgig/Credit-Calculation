@@ -1,5 +1,14 @@
 .home {
 	padding: 56px 20px;
+	height: 100%;
+	width: 100%;
+}
+
+.contentContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 	min-height: 100%;
 	width: 100%;
 }

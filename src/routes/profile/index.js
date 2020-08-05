@@ -1,47 +1,78 @@
-import { h, Component } from 'preact';
 import style from './style';
+import FormBuilder from '../../components/formBuilder';
+import Modal from '../../components/modal';
+import useBooleanState from '../../hooks/useBooleanState';
+import CreditTable from './CreditTable';
+import { useState, useCallback } from 'preact/hooks';
 
-export default class Profile extends Component {
-	state = {
-		time: Date.now(),
-		count: 10
-	};
+const Profile = () => {
+	const [isModalOpen, setModalOpen, setModalClose] = useBooleanState(true);
+	const [tableData, setTableData] = useState(null);
 
-	// update the current time
-	updateTime = () => {
-		this.setState({ time: Date.now() });
-	};
+	const handleFormSubmit = useCallback((data) => {
+		setTableData(data);
+		setModalClose();
+	}, []);
 
-	increment = () => {
-		this.setState({ count: this.state.count+1 });
-	};
+	return (
+		<div class={style.profile}>
+			{!!tableData && <CreditTable data={tableData} />}
 
-	// gets called when this route is navigated to
-	componentDidMount() {
-		// start a timer for the clock:
-		this.timer = setInterval(this.updateTime, 1000);
-	}
-
-	// gets called just before navigating away from the route
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	}
-
-	// Note: `user` comes from the URL, courtesy of our router
-	render({ user }, { time, count }) {
-		return (
-			<div class={style.profile}>
-				<h1>Profile: {user}</h1>
-				<p>This is the user profile for a user named { user }.</p>
-
-				<div>Current time: {new Date(time).toLocaleString()}</div>
-
-				<p>
-					<button onClick={this.increment}>Click Me</button>
-					{' '}
-					Clicked {count} times.
-				</p>
-			</div>
-		);
-	}
+			<Modal isOpen={isModalOpen} handleClose={setModalClose}>
+				<FormBuilder
+					initialState={{
+						amount: 1,
+						mainPercent: 1,
+						years: 20,
+						creditType: 0,
+						loanDate: '2020-02-02',
+					}}
+					onSubmit={handleFormSubmit}
+				>
+					{({ handleChange, values, onSubmit }) => (
+						<div class={style.form} >
+							<div>
+								<label>Сумма кредита в белорусских рублях</label>
+								<input onInput={handleChange} name="amount" type="number" value={values.amount} />
+							</div>
+							<div>
+								<label>
+									Годовой процент
+								</label>
+								<input onInput={handleChange} type="number" step="0.01" name="mainPercent" value={values.mainPercent} />
+							</div>
+							<div>
+								<label>
+									На сколько лет кредит
+								</label>
+								<input onInput={handleChange} type="number" name="years" value={values.years} />
+							</div>
+							<div>
+								<label>
+									Тип выплаты
+								</label>
+								<select onChange={handleChange} name="creditType" value={values.creditType}>
+									<option value={0}>Аннуитет</option>
+								</select>
+							</div>
+							<label>
+								Дата взятия кредита
+							</label>
+							<input onInput={handleChange} name="loanDate" value={values.loanDate} type="date" placeholder="Дата взятия кредита"/>
+							<div class={style.buttons}>
+								<button onClick={setModalClose} >
+									Cancel
+								</button>
+								<button type="submit">
+									Save
+								</button>
+							</div>
+						</div>
+					)}
+				</FormBuilder>
+			</Modal>
+		</div>
+	);
 }
+
+export default Profile;

@@ -9,7 +9,7 @@ const defaultState = {
   loanDate: '2020-02-02',
 };
 
-const ModalForm = ({ data, handleFormSubmit, isModalOpen }) => {
+const ModalForm = ({ data, handleFormSubmit, isModalOpen, setModalClose }) => {
   const [{sum, loanDate}, setFormState] = useState(data || defaultState);
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
@@ -18,13 +18,14 @@ const ModalForm = ({ data, handleFormSubmit, isModalOpen }) => {
 
   const handleInputChange = useCallback((e) => {
     const {target: { dataset: { key }, value }} = e;
+    
     setFormState((prevState) => ({
       ...prevState,
       [key]: value,
     }));
   }, [])
 
-  return (<Modal isOpen={isModalOpen}>
+  return (<Modal isOpen={isModalOpen} title="Калькулятор" handleClose={setModalClose}>
     <form onSubmit={handleSubmit} class={style.container}>
       <div class={style.inputsContainer}>
         <div>
@@ -37,11 +38,11 @@ const ModalForm = ({ data, handleFormSubmit, isModalOpen }) => {
           <label>
             Дата взятия кредита
           </label>
-          <input onInput={handleInputChange} data-key="date" value={loanDate} type="date" placeholder="Дата взятия кредита"/>
+          <input onInput={handleInputChange} data-key="loanDate" value={loanDate} type="date" placeholder="Дата взятия кредита"/>
         </div>
       </div>
       <div class={style.buttons}>
-        <button>
+        <button onClick={setModalClose} >
           Cancel
         </button>
         <button type="submit">

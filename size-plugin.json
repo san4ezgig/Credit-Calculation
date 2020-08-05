@@ -1,0 +1,180 @@
+[
+  {
+    "timestamp": 1596559140111,
+    "files": [
+      {
+        "filename": "bundle.7e56a.css",
+        "previous": 445,
+        "size": 445,
+        "diff": 0
+      },
+      {
+        "filename": "bundle.*****.esm.js",
+        "previous": 8253,
+        "size": 8265,
+        "diff": 12
+      },
+      {
+        "filename": "polyfills.*****.esm.js",
+        "previous": 1969,
+        "size": 1982,
+        "diff": 13
+      },
+      {
+        "filename": "route-home.chunk.bee86.css",
+        "previous": 421,
+        "size": 421,
+        "diff": 0
+      },
+      {
+        "filename": "route-home.chunk.*****.esm.js",
+        "previous": 5578,
+        "size": 5578,
+        "diff": 0
+      },
+      {
+        "filename": "route-profile.chunk.62c75.css",
+        "previous": 77,
+        "size": 77,
+        "diff": 0
+      },
+      {
+        "filename": "route-profile.chunk.*****.esm.js",
+        "previous": 517,
+        "size": 517,
+        "diff": 0
+      },
+      {
+        "filename": "sw-esm.js",
+        "previous": 8266,
+        "size": 8279,
+        "diff": 13
+      },
+      {
+        "filename": "sw.js",
+        "previous": 8266,
+        "size": 8279,
+        "diff": 13
+      },
+      {
+        "filename": "bundle.0d13d.js",
+        "previous": 8325,
+        "size": 0,
+        "diff": -8325
+      },
+      {
+        "filename": "polyfills.694cb.js",
+        "previous": 2013,
+        "size": 0,
+        "diff": -2013
+      },
+      {
+        "filename": "route-home.chunk.381d2.js",
+        "previous": 5728,
+        "size": 5728,
+        "diff": 0
+      },
+      {
+        "filename": "route-profile.chunk.a1574.js",
+        "previous": 681,
+        "size": 681,
+        "diff": 0
+      },
+      {
+        "filename": "bundle.95b85.js",
+        "previous": 0,
+        "size": 8340,
+        "diff": 8340
+      },
+      {
+        "filename": "polyfills.9246c.js",
+        "previous": 0,
+        "size": 2026,
+        "diff": 2026
+      }
+    ]
+  },
+  {
+    "timestamp": 1596556518842,
+    "files": [
+      {
+        "filename": "bundle.7e56a.css",
+        "previous": 0,
+        "size": 445,
+        "diff": 445
+      },
+      {
+        "filename": "bundle.*****.esm.js",
+        "previous": 0,
+        "size": 8253,
+        "diff": 8253
+      },
+      {
+        "filename": "polyfills.*****.esm.js",
+        "previous": 0,
+        "size": 1969,
+        "diff": 1969
+      },
+      {
+        "filename": "route-home.chunk.bee86.css",
+        "previous": 0,
+        "size": 421,
+        "diff": 421
+      },
+      {
+        "filename": "route-home.chunk.*****.esm.js",
+        "previous": 0,
+        "size": 5578,
+        "diff": 5578
+      },
+      {
+        "filename": "route-profile.chunk.62c75.css",
+        "previous": 0,
+        "size": 77,
+        "diff": 77
+      },
+      {
+        "filename": "route-profile.chunk.*****.esm.js",
+        "previous": 0,
+        "size": 517,
+        "diff": 517
+      },
+      {
+        "filename": "sw-esm.js",
+        "previous": 0,
+        "size": 8266,
+        "diff": 8266
+      },
+      {
+        "filename": "sw.js",
+        "previous": 0,
+        "size": 8266,
+        "diff": 8266
+      },
+      {
+        "filename": "bundle.0d13d.js",
+        "previous": 0,
+        "size": 8325,
+        "diff": 8325
+      },
+      {
+        "filename": "polyfills.694cb.js",
+        "previous": 0,
+        "size": 2013,
+        "diff": 2013
+      },
+      {
+        "filename": "route-home.chunk.381d2.js",
+        "previous": 0,
+        "size": 5728,
+        "diff": 5728
+      },
+      {
+        "filename": "route-profile.chunk.a1574.js",
+        "previous": 0,
+        "size": 681,
+        "diff": 681
+      }
+    ]
+  }
+]
